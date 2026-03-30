@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naman Khater | Full-Stack Software Engineer</title>
+  <meta name="description" content="Portfolio of Naman Khater - Full-Stack Software Engineer at GEP Worldwide. Creator of VS Code extensions with 280+ installs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: #222222;
+      --text: #e5e5e5;
+      --text-muted: #888888;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --green: #22c55e;
+      --purple: #a78bfa;
+      --orange: #f97316;
+      --pink: #ec4899;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-hover); }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Navigation */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 16px 0;
+    }
+    nav .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    nav .logo {
+      font-weight: 700; font-size: 1.1rem; color: var(--text);
+    }
+    nav .logo span { color: var(--accent); }
+    nav .links { display: flex; gap: 28px; }
+    nav .links a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+    nav .links a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 80px;
+    }
+    .hero-content { max-width: 700px; }
+    .hero .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 0.8rem; color: var(--green); font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .hero .badge::before {
+      content: ''; width: 8px; height: 8px;
+      background: var(--green); border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.15rem; color: var(--text-muted);
+      max-width: 560px; margin-bottom: 32px;
+    }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 10px;
+      font-weight: 600; font-size: 0.9rem;
+      transition: all 0.2s; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-hover); color: #fff; transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--surface-2); color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    /* Section styles */
+    section { padding: 100px 0; }
+    .section-label {
+      font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 2rem; font-weight: 700; margin-bottom: 48px;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px; margin-top: 60px;
+    }
+    .stat {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2.2rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
+
+    /* Extensions Section */
+    .extensions-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .ext-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .ext-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(59, 130, 246, 0.08);
+    }
+    .ext-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: linear-gradient(90deg, var(--accent), var(--purple));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .ext-card:hover::before { opacity: 1; }
+    .ext-icon {
+      width: 56px; height: 56px;
+      background: var(--surface-2); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 20px;
+    }
+    .ext-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+    .ext-card .ext-desc {
+      color: var(--text-muted); font-size: 0.9rem;
+      margin-bottom: 16px; line-height: 1.5;
+    }
+    .ext-meta {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .ext-meta span {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.8rem; color: var(--text-muted);
+    }
+    .ext-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .ext-tag {
+      background: var(--surface-2); border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 6px;
+      font-size: 0.75rem; color: var(--text-muted);
+    }
+    .ext-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-weight: 600; font-size: 0.9rem;
+    }
+
+    /* Experience */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .timeline-item {
+      padding-left: 32px; margin-bottom: 48px;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -5px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+    }
+    .timeline-item h3 { font-size: 1.15rem; font-weight: 700; }
+    .timeline-item .company { color: var(--accent); font-weight: 600; }
+    .timeline-item .period {
+      color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;
+    }
+    .timeline-item ul { list-style: none; }
+    .timeline-item li {
+      color: var(--text-muted); font-size: 0.9rem;
+      padding: 4px 0; padding-left: 16px; position: relative;
+    }
+    .timeline-item li::before {
+      content: ''; position: absolute; left: 0; top: 12px;
+      width: 6px; height: 1px; background: var(--text-muted);
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+      transition: all 0.3s;
+    }
+    .project-card:hover {
+      border-color: var(--border);
+      transform: translateY(-2px);
+    }
+    .project-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .project-card p {
+      color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;
+    }
+    .project-tech { display: flex; gap: 8px; flex-wrap: wrap; }
+    .project-tech span {
+      background: var(--surface-2); border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 6px;
+      font-size: 0.75rem; color: var(--text-muted);
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .skill-group {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .skill-group h3 {
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .skill-group p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.7; }
+
+    /* Contact */
+    .contact-links {
+      display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px;
+    }
+    .contact-link {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px 24px;
+      transition: all 0.2s; color: var(--text);
+    }
+    .contact-link:hover {
+      border-color: var(--accent); transform: translateY(-2px); color: var(--text);
+    }
+    .contact-link .label { font-weight: 600; font-size: 0.9rem; }
+    .contact-link .value { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0; text-align: center;
+      color: var(--text-muted); font-size: 0.85rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      nav .links { display: none; }
+      .hero h1 { font-size: 2.2rem; }
+      .extensions-grid, .projects-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo">naman<span>.dev</span></div>
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#extensions">Extensions</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="badge">Open to opportunities</div>
+        <h1>Hi, I'm <span class="gradient">Naman Khater</span></h1>
+        <p>Full-Stack Software Engineer building scalable enterprise solutions and developer tools. Creator of VS Code extensions with 280+ installs on the marketplace.</p>
+        <div class="hero-buttons">
+          <a href="#extensions" class="btn btn-primary">View My Extensions</a>
+          <a href="https://github.com/MadMaxINDIAN" class="btn btn-secondary" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/naman-22-khater/" class="btn btn-secondary" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">3+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3</div>
+          <div class="stat-label">VS Code Extensions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">280+</div>
+          <div class="stat-label">Marketplace Installs</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">15+</div>
+          <div class="stat-label">Enterprise Modules</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">About</div>
+      <div class="section-title">Building tools developers love</div>
+      <p style="color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.8;">
+        I'm a Full-Stack Software Engineer at <strong style="color: var(--text)">GEP Worldwide</strong> with 3+ years of experience building scalable enterprise applications. I've accelerated feature delivery by 30%, improved system performance by 20%, and integrated Generative AI capabilities that boosted product efficiency by 40%.
+      </p>
+      <p style="color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.8; margin-top: 16px;">
+        Outside of work, I build developer tools as VS Code extensions, focusing on data visualization, schema modeling, and format conversion. My extensions have been installed 280+ times by developers around the world.
+      </p>
+    </div>
+  </section>
+
+  <!-- VS Code Extensions -->
+  <section id="extensions" style="background: var(--surface);">
+    <div class="container">
+      <div class="section-label">VS Code Extensions</div>
+      <div class="section-title">Published on the Marketplace</div>
+      <div class="extensions-grid">
+
+        <!-- MongoDB Architect -->
+        <div class="ext-card">
+          <div class="ext-icon">&#x1f4e6;</div>
+          <h3>MongoDB Architect</h3>
+          <p class="ext-desc">Visual MongoDB schema modeler for VS Code. Design database schemas with an intuitive drag-and-drop interface powered by React Flow. Export to Mongoose, TypeScript, and JSON Schema.</p>
+          <div class="ext-meta">
+            <span>&#x2B07; 197 installs</span>
+            <span>&#x1f4cb; v0.0.10</span>
+            <span>&#x1f4c5; Nov 2025</span>
+          </div>
+          <div class="ext-tags">
+            <span class="ext-tag">MongoDB</span>
+            <span class="ext-tag">Schema Design</span>
+            <span class="ext-tag">React Flow</span>
+            <span class="ext-tag">Drag & Drop</span>
+          </div>
+          <a href="https://marketplace.visualstudio.com/items?itemName=Naman09Khater.mongodb-architect" target="_blank" class="ext-link">
+            View on Marketplace &rarr;
+          </a>
+        </div>
+
+        <!-- Data Format Converter -->
+        <div class="ext-card">
+          <div class="ext-icon">&#x1f504;</div>
+          <h3>Data Format Converter</h3>
+          <p class="ext-desc">Convert between JSON, XML, and YAML formats directly in VS Code with a single keyboard shortcut. Features smart detection, selection support, and multiple output options.</p>
+          <div class="ext-meta">
+            <span>&#x2B07; 49 installs</span>
+            <span>&#x1f4cb; v1.0.2</span>
+            <span>&#x1f4c5; Mar 2026</span>
+          </div>
+          <div class="ext-tags">
+            <span class="ext-tag">JSON</span>
+            <span class="ext-tag">XML</span>
+            <span class="ext-tag">YAML</span>
+            <span class="ext-tag">Converter</span>
+          </div>
+          <a href="https://marketplace.visualstudio.com/items?itemName=Naman09Khater.data-converter-vscode" target="_blank" class="ext-link">
+            View on Marketplace &rarr;
+          </a>
+        </div>
+
+        <!-- JSON Mapper -->
+        <div class="ext-card">
+          <div class="ext-icon">&#x1f517;</div>
+          <h3>JSON Mapper</h3>
+          <p class="ext-desc">Visual JSON transformation tool with an intuitive drag-and-drop interface. Map and transform data between JSON structures using 20+ pre-built functions and custom code.</p>
+          <div class="ext-meta">
+            <span>&#x2B07; 34 installs</span>
+            <span>&#x1f4cb; v0.0.2</span>
+            <span>&#x1f4c5; Apr 2026</span>
+          </div>
+          <div class="ext-tags">
+            <span class="ext-tag">JSON</span>
+            <span class="ext-tag">ETL</span>
+            <span class="ext-tag">Data Mapping</span>
+            <span class="ext-tag">Transformation</span>
+          </div>
+          <a href="https://marketplace.visualstudio.com/items?itemName=Naman09Khater.json-mapper-vscode" target="_blank" class="ext-link">
+            View on Marketplace &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label">Experience</div>
+      <div class="section-title">Where I've worked</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Software Engineer</h3>
+          <div class="company">GEP Solutions &mdash; Navi Mumbai, India</div>
+          <div class="period">Jun 2023 &ndash; Present</div>
+          <ul>
+            <li>Engineered low-code solutions using Angular and ASP.NET, accelerating feature development by 30% across 15+ enterprise modules</li>
+            <li>Owned full development lifecycle from architecture to deployment, enhancing system scalability by 20%</li>
+            <li>Partnered with the Generative AI team to integrate AI-powered features, improving product efficiency by 40%</li>
+            <li>Refactored legacy codebases, reducing technical debt by 25% and bulk processing time by 40%</li>
+            <li>Played a pivotal role in record-setting customer onboarding completed in 20% less time</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <h3>Software Engineer Intern</h3>
+          <div class="company">GEP Worldwide &mdash; Mumbai, India</div>
+          <div class="period">May 2022 &ndash; Jul 2022</div>
+          <ul>
+            <li>Developed UI/UX components and automated API testing using React, Node.js, and Cypress, reducing manual QA effort by 30%</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <h3>Junior Developer</h3>
+          <div class="company">DSC NIT Surat (Google DSC) &mdash; Surat, India</div>
+          <div class="period">Jun 2020 &ndash; Jun 2021</div>
+          <ul>
+            <li>Built web applications and mentored peers in JavaScript development through the Google Developer Student Club</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" style="background: var(--surface);">
+    <div class="container">
+      <div class="section-label">Projects</div>
+      <div class="section-title">Things I've built</div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>E-Commerce Platform</h3>
+          <p>Modular website starter template reducing project setup time by 50%, with integrated payment gateways and order management.</p>
+          <div class="project-tech">
+            <span>React</span><span>Node.js</span><span>MongoDB</span><span>Docker</span><span>Next.js</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3>Loan Management Software</h3>
+          <p>Full-stack application reducing manual loan tracking by 70%, with automated workflows cutting processing errors by 60%.</p>
+          <div class="project-tech">
+            <span>Angular</span><span>Node.js</span><span>MongoDB</span><span>AWS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label">Skills</div>
+      <div class="section-title">Technologies I work with</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <p>Python, Java, C, JavaScript, TypeScript, SQL</p>
+        </div>
+        <div class="skill-group">
+          <h3>Frontend</h3>
+          <p>React, Angular, Next.js, HTML5, CSS3, Tailwind CSS</p>
+        </div>
+        <div class="skill-group">
+          <h3>Backend</h3>
+          <p>Node.js, ASP.NET, Django, Spring Boot, REST APIs, GraphQL</p>
+        </div>
+        <div class="skill-group">
+          <h3>Cloud & Databases</h3>
+          <p>AWS (EC2, S3, Lambda), Azure, MongoDB, PostgreSQL, SQL Server</p>
+        </div>
+        <div class="skill-group">
+          <h3>DevOps & Tools</h3>
+          <p>Docker, Jenkins, Git, GitHub Actions, CI/CD, VS Code Extension API</p>
+        </div>
+        <div class="skill-group">
+          <h3>AI / ML</h3>
+          <p>Generative AI Integration, LLM APIs, Model Context Protocol (MCP)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="background: var(--surface);">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <div class="section-title">Let's connect</div>
+      <p style="color: var(--text-muted); max-width: 500px;">
+        I'm currently open to new opportunities. Whether you have a question or just want to say hi, feel free to reach out.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:naman22khater@gmail.com" class="contact-link">
+          <div>
+            <div class="label">Email</div>
+            <div class="value">naman22khater@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/naman-22-khater/" target="_blank" class="contact-link">
+          <div>
+            <div class="label">LinkedIn</div>
+            <div class="value">naman-22-khater</div>
+          </div>
+        </a>
+        <a href="https://github.com/MadMaxINDIAN" target="_blank" class="contact-link">
+          <div>
+            <div class="label">GitHub</div>
+            <div class="value">MadMaxINDIAN</div>
+          </div>
+        </a>
+        <a href="https://marketplace.visualstudio.com/publishers/Naman09Khater" target="_blank" class="contact-link">
+          <div>
+            <div class="label">VS Code Marketplace</div>
+            <div class="value">Naman09Khater</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Naman Khater. Built with care.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
