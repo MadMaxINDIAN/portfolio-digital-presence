@@ -151,6 +151,12 @@
             pointer-events: none;
         }
 
+        /* Reality/Creativity content switching */
+        .reality-content { display: none !important; }
+        .creativity-content { display: block; }
+        :root.reality-mode .reality-content { display: block !important; }
+        :root.reality-mode .creativity-content { display: none !important; }
+
         /* Menu bar */
         .menubar {
             position: fixed;
@@ -336,14 +342,17 @@
             height: calc(100vh - 28px) !important;
             border-radius: 0;
             transform: none !important;
-            opacity: 1;
-            display: flex;
         }
 
         .window.open {
             display: flex;
             opacity: 1;
             transform: scale(1);
+        }
+
+        .window.fullscreen.open {
+            display: flex;
+            opacity: 1;
         }
 
         .window-titlebar {
@@ -1818,7 +1827,11 @@ Building developer tools that developers actually love.</span>
                     <div class="window-btn maximize"></div>
                 </div>
                 <div class="window-title">NAMAN-PORTFOLIO — VS Code</div>
-                <div style="width: 40px;"></div>
+                <div style="display:flex;gap:6px;align-items:center;">
+                    <button onclick="toggleVSPanel('sidebar')" title="Toggle Explorer" style="background:none;border:1px solid var(--border);color:var(--text-dim);font-size:11px;padding:2px 8px;border-radius:3px;cursor:pointer;font-family:var(--mono);">Explorer</button>
+                    <button onclick="toggleVSPanel('terminal')" title="Toggle Terminal" style="background:none;border:1px solid var(--border);color:var(--text-dim);font-size:11px;padding:2px 8px;border-radius:3px;cursor:pointer;font-family:var(--mono);">Terminal</button>
+                    <button onclick="toggleVSPanel('claude')" title="Toggle Claude Code" style="background:none;border:1px solid var(--border);color:var(--text-dim);font-size:11px;padding:2px 8px;border-radius:3px;cursor:pointer;font-family:var(--mono);">Claude</button>
+                </div>
             </div>
             <div class="window-content" style="padding: 0; overflow: hidden;">
                 <div class="vscode-container">
@@ -2153,35 +2166,47 @@ export class JSONMapper {
                 <div style="width: 40px;"></div>
             </div>
             <div class="window-content">
-                <div class="profile-header">
-                    <div class="profile-avatar">NK</div>
-                    <div class="profile-info">
-                        <h2>Naman Khater</h2>
-                        <p>Software Engineer at GEP | VS Code Extension Creator | 280+ Installs</p>
-                        <p style="margin-top: 4px;">Mumbai, India</p>
+                <!-- Creativity Mode: Hand-crafted LinkedIn -->
+                <div class="creativity-content">
+                    <div class="profile-header">
+                        <div class="profile-avatar">NK</div>
+                        <div class="profile-info">
+                            <h2>Naman Khater</h2>
+                            <p>Software Engineer at GEP | VS Code Extension Creator | 280+ Installs</p>
+                            <p style="margin-top: 4px;">Mumbai, India</p>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">Software Engineer</div>
+                        <div class="experience-company">GEP Solutions, Navi Mumbai • Jun 2023 – Present</div>
+                        <div class="experience-desc">• Low-code solutions (Angular, ASP.NET), 30% faster feature dev, 15+ modules</div>
+                        <div class="experience-desc">• Full dev lifecycle, 20% scalability improvement</div>
+                        <div class="experience-desc">• GenAI integration, 40% efficiency boost</div>
+                        <div class="experience-desc">• Legacy refactoring, 25% tech debt reduction, 40% faster bulk processing</div>
+                        <div class="experience-desc">• Record-setting onboarding (20% less time)</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">Software Engineer Intern</div>
+                        <div class="experience-company">GEP Worldwide, Mumbai • May 2022 – Jul 2022</div>
+                        <div class="experience-desc">• UI/UX + automated API testing (React, Node.js, Cypress), 30% less manual QA</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">Junior Developer</div>
+                        <div class="experience-company">DSC NIT Surat (Google DSC) • Jun 2020 – Jun 2021</div>
+                        <div class="experience-desc">• Web apps + mentored peers in JavaScript</div>
                     </div>
                 </div>
 
-                <div class="experience-item">
-                    <div class="experience-title">Software Engineer</div>
-                    <div class="experience-company">GEP Solutions, Navi Mumbai • Jun 2023 – Present</div>
-                    <div class="experience-desc">• Low-code solutions (Angular, ASP.NET), 30% faster feature dev, 15+ modules</div>
-                    <div class="experience-desc">• Full dev lifecycle, 20% scalability improvement</div>
-                    <div class="experience-desc">• GenAI integration, 40% efficiency boost</div>
-                    <div class="experience-desc">• Legacy refactoring, 25% tech debt reduction, 40% faster bulk processing</div>
-                    <div class="experience-desc">• Record-setting onboarding (20% less time)</div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-title">Software Engineer Intern</div>
-                    <div class="experience-company">GEP Worldwide, Mumbai • May 2022 – Jul 2022</div>
-                    <div class="experience-desc">• UI/UX + automated API testing (React, Node.js, Cypress), 30% less manual QA</div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-title">Junior Developer</div>
-                    <div class="experience-company">DSC NIT Surat (Google DSC) • Jun 2020 – Jun 2021</div>
-                    <div class="experience-desc">• Web apps + mentored peers in JavaScript</div>
+                <!-- Reality Mode: Live LinkedIn redirect -->
+                <div class="reality-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:20px;text-align:center;">
+                    <div style="width:80px;height:80px;border-radius:16px;background:linear-gradient(135deg,#0a66c2,#0077b5);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:700;color:#fff;">in</div>
+                    <div style="font-size:22px;font-weight:700;color:var(--text);">Naman Khater</div>
+                    <div style="font-size:14px;color:var(--text-dim);max-width:300px;">Software Engineer at GEP Worldwide<br>Mumbai, India</div>
+                    <a href="https://www.linkedin.com/in/naman-22-khater/" target="_blank" style="display:inline-block;padding:12px 32px;background:#0a66c2;color:#fff;border-radius:24px;text-decoration:none;font-size:15px;font-weight:600;transition:background 0.2s;">Open LinkedIn Profile</a>
+                    <div style="font-size:11px;color:var(--text-dim);margin-top:8px;">Opens in a new tab — always up to date</div>
                 </div>
             </div>
         </div>
@@ -2198,48 +2223,71 @@ export class JSONMapper {
                 <div style="width: 40px;"></div>
             </div>
             <div class="window-content">
-                <div class="search-container">
-                    <div class="google-logo">Google</div>
-                    <div class="search-bar">
-                        <input type="text" class="search-input" placeholder="Naman Khater technical skills" readonly>
+                <!-- Creativity Mode: Curated search results -->
+                <div class="creativity-content">
+                    <div class="search-container">
+                        <div class="google-logo">Google</div>
+                        <div class="search-bar">
+                            <input type="text" class="search-input" placeholder="Naman Khater technical skills" readonly>
+                        </div>
+                    </div>
+
+                    <div class="search-results">
+                        <div class="search-result">
+                            <div class="search-title">Languages</div>
+                            <div class="search-url">skills.example.com › programming languages</div>
+                            <div class="search-desc">Python, Java, C, JavaScript, TypeScript, SQL</div>
+                        </div>
+
+                        <div class="search-result">
+                            <div class="search-title">Frontend</div>
+                            <div class="search-url">skills.example.com › frontend frameworks</div>
+                            <div class="search-desc">React, Angular, Next.js, HTML5, CSS3, Tailwind CSS</div>
+                        </div>
+
+                        <div class="search-result">
+                            <div class="search-title">Backend</div>
+                            <div class="search-url">skills.example.com › backend technologies</div>
+                            <div class="search-desc">Node.js, ASP.NET, Django, Spring Boot, REST APIs, GraphQL</div>
+                        </div>
+
+                        <div class="search-result">
+                            <div class="search-title">Cloud & Databases</div>
+                            <div class="search-url">skills.example.com › cloud & infrastructure</div>
+                            <div class="search-desc">AWS (EC2, S3, Lambda), Azure, MongoDB, PostgreSQL, SQL Server</div>
+                        </div>
+
+                        <div class="search-result">
+                            <div class="search-title">DevOps & Tools</div>
+                            <div class="search-url">skills.example.com › devops tools</div>
+                            <div class="search-desc">Docker, Jenkins, Git, GitHub Actions, CI/CD, VS Code Extension API</div>
+                        </div>
+
+                        <div class="search-result">
+                            <div class="search-title">AI / ML</div>
+                            <div class="search-url">skills.example.com › artificial intelligence</div>
+                            <div class="search-desc">Generative AI Integration, LLM APIs, Model Context Protocol (MCP)</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="search-results">
-                    <div class="search-result">
-                        <div class="search-title">Languages</div>
-                        <div class="search-url">skills.example.com › programming languages</div>
-                        <div class="search-desc">Python, Java, C, JavaScript, TypeScript, SQL</div>
+                <!-- Reality Mode: Real Google search -->
+                <div class="reality-content">
+                    <div class="search-container">
+                        <div class="google-logo">Google</div>
+                        <form class="search-bar" onsubmit="event.preventDefault(); window.open('https://www.google.com/search?q=' + encodeURIComponent(this.querySelector('input').value), '_blank');">
+                            <input type="text" class="search-input" placeholder="Search Google..." value="Naman Khater Software Engineer" style="cursor:text;">
+                            <button type="submit" style="background:none;border:none;color:var(--cyan);font-size:14px;cursor:pointer;padding:4px 8px;">Search</button>
+                        </form>
                     </div>
-
-                    <div class="search-result">
-                        <div class="search-title">Frontend</div>
-                        <div class="search-url">skills.example.com › frontend frameworks</div>
-                        <div class="search-desc">React, Angular, Next.js, HTML5, CSS3, Tailwind CSS</div>
-                    </div>
-
-                    <div class="search-result">
-                        <div class="search-title">Backend</div>
-                        <div class="search-url">skills.example.com › backend technologies</div>
-                        <div class="search-desc">Node.js, ASP.NET, Django, Spring Boot, REST APIs, GraphQL</div>
-                    </div>
-
-                    <div class="search-result">
-                        <div class="search-title">Cloud & Databases</div>
-                        <div class="search-url">skills.example.com › cloud & infrastructure</div>
-                        <div class="search-desc">AWS (EC2, S3, Lambda), Azure, MongoDB, PostgreSQL, SQL Server</div>
-                    </div>
-
-                    <div class="search-result">
-                        <div class="search-title">DevOps & Tools</div>
-                        <div class="search-url">skills.example.com › devops tools</div>
-                        <div class="search-desc">Docker, Jenkins, Git, GitHub Actions, CI/CD, VS Code Extension API</div>
-                    </div>
-
-                    <div class="search-result">
-                        <div class="search-title">AI / ML</div>
-                        <div class="search-url">skills.example.com › artificial intelligence</div>
-                        <div class="search-desc">Generative AI Integration, LLM APIs, Model Context Protocol (MCP)</div>
+                    <div style="padding:20px;text-align:center;">
+                        <div style="font-size:14px;color:var(--text-dim);margin-bottom:24px;">Type anything and hit Search — it opens real Google results in a new tab</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+                            <a onclick="window.open('https://www.google.com/search?q=Naman+Khater+Software+Engineer','_blank')" style="padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text);font-size:13px;cursor:pointer;text-decoration:none;">Naman Khater</a>
+                            <a onclick="window.open('https://www.google.com/search?q=GEP+Worldwide+Software+Engineer','_blank')" style="padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text);font-size:13px;cursor:pointer;text-decoration:none;">GEP Worldwide</a>
+                            <a onclick="window.open('https://www.google.com/search?q=MongoDB+Architect+VS+Code+Extension','_blank')" style="padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text);font-size:13px;cursor:pointer;text-decoration:none;">MongoDB Architect Extension</a>
+                            <a onclick="window.open('https://www.google.com/search?q=Model+Context+Protocol+MCP','_blank')" style="padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text);font-size:13px;cursor:pointer;text-decoration:none;">MCP Protocol</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2257,62 +2305,75 @@ export class JSONMapper {
                 <div style="width: 40px;"></div>
             </div>
             <div class="window-content">
-                <div class="repo-card">
-                    <div class="repo-header">
-                        <div class="repo-name">ECIP</div>
-                        <div class="repo-badge">FEATURED</div>
+                <!-- Creativity Mode Content -->
+                <div class="creativity-content">
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-name">ECIP</div>
+                            <div class="repo-badge">FEATURED</div>
+                        </div>
+                        <div class="repo-meta">Enterprise Code Intelligence Platform • Solo Architect & Developer • 2025–Present</div>
+                        <div class="repo-desc">Microservices platform indexing enterprise GitHub repos, delivering semantically-aware code context to AI assistants (GitHub Copilot, Cursor, Claude Code) via MCP. Solves "Lost in the Middle" context degradation for 50+ repo codebases.</div>
+                        <div class="repo-features">
+                            <div class="repo-feature">• 8 independent microservices (TypeScript/Node.js)</div>
+                            <div class="repo-feature">• Branch-aware LSP: Tree-sitter + LSP + Voyage AI embeddings (1024-dim, pgvector), p95: 475ms</div>
+                            <div class="repo-feature">• Cross-repo MCP Server federation, Registry-based discovery</div>
+                            <div class="repo-feature">• 19-container Docker stack, 1,434+ unit tests</div>
+                            <div class="repo-feature">• Ed25519 license signing, Stripe metering, FeatureGate</div>
+                        </div>
+                        <div class="repo-stack">
+                            <div class="stack-tag">TypeScript</div>
+                            <div class="stack-tag">Node.js</div>
+                            <div class="stack-tag">PostgreSQL</div>
+                            <div class="stack-tag">Redis</div>
+                            <div class="stack-tag">Kafka</div>
+                            <div class="stack-tag">Docker</div>
+                            <div class="stack-tag">Kubernetes</div>
+                        </div>
+                        <div class="repo-languages">
+                            <div class="language-bar" style="width: 78%; background: #3178c6;"></div>
+                            <div class="language-bar" style="width: 12%; background: #f1e05a;"></div>
+                            <div class="language-bar" style="width: 5%; background: #384d54;"></div>
+                            <div class="language-bar" style="width: 5%; background: #555;"></div>
+                        </div>
+                        <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px;">TypeScript 78% • JavaScript 12% • Docker 5% • Other 5%</div>
                     </div>
-                    <div class="repo-meta">Enterprise Code Intelligence Platform • Solo Architect & Developer • 2025–Present</div>
-                    <div class="repo-desc">Microservices platform indexing enterprise GitHub repos, delivering semantically-aware code context to AI assistants (GitHub Copilot, Cursor, Claude Code) via MCP. Solves "Lost in the Middle" context degradation for 50+ repo codebases.</div>
-                    <div class="repo-features">
-                        <div class="repo-feature">• 8 independent microservices (TypeScript/Node.js)</div>
-                        <div class="repo-feature">• Branch-aware LSP: Tree-sitter + LSP + Voyage AI embeddings (1024-dim, pgvector), p95: 475ms</div>
-                        <div class="repo-feature">• Cross-repo MCP Server federation, Registry-based discovery</div>
-                        <div class="repo-feature">• 19-container Docker stack, 1,434+ unit tests</div>
-                        <div class="repo-feature">• Ed25519 license signing, Stripe metering, FeatureGate</div>
+
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-name">E-Commerce Platform</div>
+                        </div>
+                        <div class="repo-desc">Modular starter, 50% faster setup. Scalable full-stack solution with payment integration.</div>
+                        <div class="repo-stack">
+                            <div class="stack-tag">React</div>
+                            <div class="stack-tag">Node.js</div>
+                            <div class="stack-tag">MongoDB</div>
+                            <div class="stack-tag">Docker</div>
+                            <div class="stack-tag">Next.js</div>
+                        </div>
                     </div>
-                    <div class="repo-stack">
-                        <div class="stack-tag">TypeScript</div>
-                        <div class="stack-tag">Node.js</div>
-                        <div class="stack-tag">PostgreSQL</div>
-                        <div class="stack-tag">Redis</div>
-                        <div class="stack-tag">Kafka</div>
-                        <div class="stack-tag">Docker</div>
-                        <div class="stack-tag">Kubernetes</div>
+
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-name">Loan Management Software</div>
+                        </div>
+                        <div class="repo-desc">70% less manual tracking, 60% fewer errors. Enterprise-grade application for financial operations.</div>
+                        <div class="repo-stack">
+                            <div class="stack-tag">Angular</div>
+                            <div class="stack-tag">Node.js</div>
+                            <div class="stack-tag">MongoDB</div>
+                            <div class="stack-tag">AWS</div>
+                        </div>
                     </div>
-                    <div class="repo-languages">
-                        <div class="language-bar" style="width: 78%; background: #3178c6;"></div>
-                        <div class="language-bar" style="width: 12%; background: #f1e05a;"></div>
-                        <div class="language-bar" style="width: 5%; background: #384d54;"></div>
-                        <div class="language-bar" style="width: 5%; background: #555;"></div>
-                    </div>
-                    <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px;">TypeScript 78% • JavaScript 12% • Docker 5% • Other 5%</div>
                 </div>
 
-                <div class="repo-card">
-                    <div class="repo-header">
-                        <div class="repo-name">E-Commerce Platform</div>
-                    </div>
-                    <div class="repo-desc">Modular starter, 50% faster setup. Scalable full-stack solution with payment integration.</div>
-                    <div class="repo-stack">
-                        <div class="stack-tag">React</div>
-                        <div class="stack-tag">Node.js</div>
-                        <div class="stack-tag">MongoDB</div>
-                        <div class="stack-tag">Docker</div>
-                        <div class="stack-tag">Next.js</div>
-                    </div>
-                </div>
-
-                <div class="repo-card">
-                    <div class="repo-header">
-                        <div class="repo-name">Loan Management Software</div>
-                    </div>
-                    <div class="repo-desc">70% less manual tracking, 60% fewer errors. Enterprise-grade application for financial operations.</div>
-                    <div class="repo-stack">
-                        <div class="stack-tag">Angular</div>
-                        <div class="stack-tag">Node.js</div>
-                        <div class="stack-tag">MongoDB</div>
-                        <div class="stack-tag">AWS</div>
+                <!-- Reality Mode Content (loaded via GitHub API) -->
+                <div class="reality-content" id="github-reality-content" style="display:none;">
+                    <div style="text-align:center;padding:60px 20px;color:var(--text-dim);">
+                        <div style="font-size:48px;margin-bottom:16px;">⑂</div>
+                        <div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px;">Live GitHub Profile</div>
+                        <div style="font-size:13px;margin-bottom:20px;">Switch to Reality mode to load live data from GitHub API</div>
+                        <a href="https://github.com/MadMaxINDIAN" target="_blank" style="color:var(--cyan);text-decoration:none;font-size:14px;">View github.com/MadMaxINDIAN →</a>
                     </div>
                 </div>
             </div>
@@ -2762,6 +2823,20 @@ Building developer tools that developers actually love.</span>
             if (readmeItem) readmeItem.classList.add('active');
         });
 
+        // VS Code Panel Toggles
+        function toggleVSPanel(panel) {
+            if (panel === 'sidebar') {
+                const el = document.querySelector('.vscode-sidebar');
+                if (el) el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+            } else if (panel === 'terminal') {
+                const el = document.querySelector('.vscode-panel');
+                if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+            } else if (panel === 'claude') {
+                const el = document.querySelector('.vscode-right-panel');
+                if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+
         // Particle canvas
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
@@ -2880,6 +2955,101 @@ Building developer tools that developers actually love.</span>
                 openWindow('terminal');
             }, 2300);
         });
+
+        // Scroll to open windows sequentially
+        let scrollOpenedWindows = new Set();
+        window.addEventListener('scroll', () => {
+            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+
+            const windowsToOpen = [
+                { id: 'terminal', threshold: 0.05 },
+                { id: 'vscode', threshold: 0.2 },
+                { id: 'linkedin', threshold: 0.35 },
+                { id: 'safari', threshold: 0.5 },
+                { id: 'github', threshold: 0.65 },
+                { id: 'mail', threshold: 0.8 }
+            ];
+
+            windowsToOpen.forEach(w => {
+                if (scrollPercent >= w.threshold && !scrollOpenedWindows.has(w.id)) {
+                    openWindow(w.id);
+                    scrollOpenedWindows.add(w.id);
+                }
+            });
+
+            // Reset if scrolled back to top
+            if (scrollPercent < 0.03) {
+                scrollOpenedWindows.clear();
+                openWindow('terminal');
+            }
+        });
+
+        // ============ GITHUB API (Reality Mode) ============
+        let githubDataLoaded = false;
+        function loadGitHubData() {
+            if (githubDataLoaded) return;
+            githubDataLoaded = true;
+
+            const container = document.getElementById('github-reality-content');
+            if (!container) return;
+
+            container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-dim);">Loading live GitHub data...</div>';
+
+            Promise.all([
+                fetch('https://api.github.com/users/MadMaxINDIAN').then(r => r.json()),
+                fetch('https://api.github.com/users/MadMaxINDIAN/repos?sort=updated&per_page=6').then(r => r.json())
+            ]).then(([user, repos]) => {
+                let html = `
+                    <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);">
+                        <img src="${user.avatar_url}" style="width:64px;height:64px;border-radius:50%;border:2px solid var(--border);">
+                        <div>
+                            <div style="font-size:20px;font-weight:700;color:var(--text);">${user.name || user.login}</div>
+                            <div style="font-size:13px;color:var(--text-dim);">${user.bio || ''}</div>
+                            <div style="font-size:12px;color:var(--text-dim);margin-top:4px;">
+                                ${user.public_repos} repos · ${user.followers} followers · ${user.following} following
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                repos.forEach(repo => {
+                    const lang = repo.language || 'Unknown';
+                    const stars = repo.stargazers_count;
+                    const updated = new Date(repo.updated_at).toLocaleDateString();
+                    html += `
+                        <div class="repo-card" style="margin-bottom:12px;">
+                            <div class="repo-header">
+                                <a href="${repo.html_url}" target="_blank" class="repo-name" style="text-decoration:none;">${repo.name}</a>
+                                ${stars > 0 ? '<span style="font-size:12px;color:var(--text-dim);">★ ' + stars + '</span>' : ''}
+                            </div>
+                            <div class="repo-desc" style="font-size:13px;">${repo.description || 'No description'}</div>
+                            <div style="display:flex;gap:12px;font-size:11px;color:var(--text-dim);margin-top:6px;">
+                                <span>● ${lang}</span>
+                                <span>Updated ${updated}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+            }).catch(err => {
+                container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--pink);">Could not load GitHub data. <a href="https://github.com/MadMaxINDIAN" target="_blank" style="color:var(--cyan);">View on GitHub →</a></div>';
+            });
+        }
+
+        // Load GitHub data when Reality mode is toggled or GitHub window is opened
+        const origToggleMode = window.toggleMode || toggleMode;
+        const origOpenWindow = openWindow;
+        const _openWindow = openWindow;
+
+        // Patch toggleMode to trigger GitHub API load
+        const _origToggle = toggleMode;
+        window.toggleMode = function() {
+            _origToggle();
+            if (document.documentElement.classList.contains('reality-mode')) {
+                loadGitHubData();
+            }
+        };
 
         // Send message
         function sendMessage() {
