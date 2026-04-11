@@ -1878,6 +1878,25 @@
                 width: 100%;
             }
         }
+
+        @media print {
+            body * { visibility: hidden; }
+            #resume-printable, #resume-printable * { visibility: visible; }
+            #resume-printable {
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%;
+                background: #fff;
+                color: #000;
+                padding: 40px;
+                font-family: sans-serif;
+                font-size: 13px;
+            }
+            #resume-printable h2 { color: #003366 !important; }
+            #resume-printable .resume-section-title { color: #003366 !important; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+            #resume-printable .resume-item-subtitle { color: #0066cc !important; }
+            #resume-printable * { color: #000 !important; }
+        }
     </style>
 </head>
 <body>
@@ -2037,6 +2056,9 @@ Building developer tools that developers actually love.</span>
   "modules": "15+",
   "companies": ["GEP Worldwide"]
 }</span>
+
+<span class="terminal-prompt">naman@macbook ~ %</span> <span class="terminal-output">webmcp status</span>
+<span class="terminal-output" id="webmcp-status-line" style="color: var(--green);">checking navigator.modelContext...</span>
 
 <span class="terminal-prompt">naman@macbook ~ %</span> <span class="terminal-cursor"></span>
                 </div>
@@ -2292,9 +2314,17 @@ export class JSONMapper {
 
                             <!-- Resume -->
                             <div id="vscode-content-resume" style="display: none;">
-                                <div class="resume-preview">
-                                    <h2 style="color: var(--cyan); margin-bottom: 8px;">Naman Khater</h2>
-                                    <p style="color: var(--text-dim); margin-bottom: 16px;">Software Engineer | Mumbai, India | naman22khater@gmail.com</p>
+                                <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+                                    <button onclick="downloadCV()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--cyan);color:#000;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--mono);letter-spacing:0.5px;">⬇ Download CV (PDF)</button>
+                                </div>
+                                <div class="resume-preview" id="resume-printable">
+                                    <h2 style="color: var(--cyan); margin-bottom: 4px;">Naman Khater</h2>
+                                    <p style="color: var(--text-dim); margin-bottom: 4px;">Software Engineer | Mumbai, India | naman22khater@gmail.com</p>
+                                    <div style="display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;padding:4px 10px;background:rgba(0,200,120,0.1);border:1px solid rgba(0,200,120,0.35);border-radius:12px;">
+                                        <span style="width:7px;height:7px;border-radius:50%;background:#00c878;display:inline-block;"></span>
+                                        <span style="color:#00c878;font-size:11px;font-weight:600;">Open to Work</span>
+                                    </div>
+                                    <p style="color: var(--text-dim); font-size: 11px; margin-bottom: 16px; font-style: italic;">Seeking full-stack / Senior SDE roles in product-led companies — open to remote or hybrid. Targeting 30–50% compensation growth.</p>
 
                                     <div class="resume-section">
                                         <div class="resume-section-title">PROFESSIONAL SUMMARY</div>
@@ -2330,6 +2360,14 @@ export class JSONMapper {
                                             <div class="resume-item-description">
                                                 • Web applications, mentored peers in JavaScript
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="resume-section">
+                                        <div class="resume-section-title">EDUCATION</div>
+                                        <div class="resume-item">
+                                            <div class="resume-item-title">B.Tech, Computer Science &amp; Engineering</div>
+                                            <div class="resume-item-subtitle">SVNIT (NIT Surat) • 2019 – 2023</div>
                                         </div>
                                     </div>
 
@@ -2399,7 +2437,14 @@ export class JSONMapper {
                             <h2>Naman Khater</h2>
                             <p>Software Engineer at GEP | VS Code Extension Creator | 280+ Installs</p>
                             <p style="margin-top: 4px;">Mumbai, India</p>
+                            <div style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 12px;background:rgba(0,200,120,0.12);border:1px solid rgba(0,200,120,0.4);border-radius:20px;">
+                                <span style="width:8px;height:8px;border-radius:50%;background:#00c878;display:inline-block;"></span>
+                                <span style="color:#00c878;font-size:12px;font-weight:600;">Open to Work — Senior SDE / Full-Stack roles, India or Remote</span>
+                            </div>
                         </div>
+                    </div>
+                    <div style="margin: 12px 0 16px;">
+                        <a href="https://www.linkedin.com/in/naman-22-khater/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#0a66c2;color:#fff;border-radius:20px;text-decoration:none;font-size:13px;font-weight:600;">Connect on LinkedIn →</a>
                     </div>
 
                     <div class="experience-item">
@@ -2422,6 +2467,12 @@ export class JSONMapper {
                         <div class="experience-title">Junior Developer</div>
                         <div class="experience-company">DSC NIT Surat (Google DSC) • Jun 2020 – Jun 2021</div>
                         <div class="experience-desc">• Web apps + mentored peers in JavaScript</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title" style="font-size: 12px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Education</div>
+                        <div class="experience-title">B.Tech, Computer Science &amp; Engineering</div>
+                        <div class="experience-company">SVNIT (NIT Surat) • 2019 – 2023</div>
                     </div>
                 </div>
 
@@ -2460,38 +2511,48 @@ export class JSONMapper {
                     <div class="search-results">
                         <div class="search-result">
                             <div class="search-title">Languages</div>
-                            <div class="search-url">skills.example.com › programming languages</div>
+                            <div class="search-url">namankhater.com › skills › languages</div>
                             <div class="search-desc">Python, Java, C, JavaScript, TypeScript, SQL</div>
                         </div>
 
                         <div class="search-result">
                             <div class="search-title">Frontend</div>
-                            <div class="search-url">skills.example.com › frontend frameworks</div>
+                            <div class="search-url">namankhater.com › skills › frontend</div>
                             <div class="search-desc">React, Angular, Next.js, HTML5, CSS3, Tailwind CSS</div>
                         </div>
 
                         <div class="search-result">
                             <div class="search-title">Backend</div>
-                            <div class="search-url">skills.example.com › backend technologies</div>
+                            <div class="search-url">namankhater.com › skills › backend</div>
                             <div class="search-desc">Node.js, ASP.NET, Django, Spring Boot, REST APIs, GraphQL</div>
                         </div>
 
                         <div class="search-result">
                             <div class="search-title">Cloud & Databases</div>
-                            <div class="search-url">skills.example.com › cloud & infrastructure</div>
+                            <div class="search-url">namankhater.com › skills › cloud</div>
                             <div class="search-desc">AWS (EC2, S3, Lambda), Azure, MongoDB, PostgreSQL, SQL Server</div>
                         </div>
 
                         <div class="search-result">
                             <div class="search-title">DevOps & Tools</div>
-                            <div class="search-url">skills.example.com › devops tools</div>
+                            <div class="search-url">namankhater.com › skills › devops</div>
                             <div class="search-desc">Docker, Jenkins, Git, GitHub Actions, CI/CD, VS Code Extension API</div>
                         </div>
 
                         <div class="search-result">
                             <div class="search-title">AI / ML</div>
-                            <div class="search-url">skills.example.com › artificial intelligence</div>
+                            <div class="search-url">namankhater.com › skills › ai</div>
                             <div class="search-desc">Generative AI Integration, LLM APIs, Model Context Protocol (MCP)</div>
+                        </div>
+
+                        <div class="search-result">
+                            <div class="search-title">Agentic Web</div>
+                            <div class="search-url">namankhater.com › skills › agentic-web</div>
+                            <div class="search-desc">WebMCP (navigator.modelContext), Anthropic MCP (JSON-RPC / SSE), Google Managed MCP (gRPC), MCP Server development</div>
+                            <div style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 8px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);border-radius:10px;">
+                                <span style="width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;"></span>
+                                <span style="color:var(--cyan);font-size:11px;font-weight:600;">WebMCP enabled on this site</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2538,6 +2599,7 @@ export class JSONMapper {
                             <div class="repo-badge">FEATURED</div>
                         </div>
                         <div class="repo-meta">Enterprise Code Intelligence Platform • Solo Architect & Developer • 2025–Present</div>
+                        <div class="repo-desc" style="color: var(--text); font-weight: 500; margin-bottom: 6px;">An AI-powered search engine for code — helps developers instantly find relevant context across 50+ large repositories without losing their place.</div>
                         <div class="repo-desc">Microservices platform indexing enterprise GitHub repos, delivering semantically-aware code context to AI assistants (GitHub Copilot, Cursor, Claude Code) via MCP. Solves "Lost in the Middle" context degradation for 50+ repo codebases.</div>
                         <div class="repo-features">
                             <div class="repo-feature">• 8 independent microservices (TypeScript/Node.js)</div>
@@ -2567,6 +2629,7 @@ export class JSONMapper {
                     <div class="repo-card">
                         <div class="repo-header">
                             <div class="repo-name">E-Commerce Platform</div>
+                            <div class="repo-badge" style="background:rgba(100,100,100,0.2);color:var(--text-dim);">PRIVATE</div>
                         </div>
                         <div class="repo-desc">Modular starter, 50% faster setup. Scalable full-stack solution with payment integration.</div>
                         <div class="repo-stack">
@@ -2576,11 +2639,15 @@ export class JSONMapper {
                             <div class="stack-tag">Docker</div>
                             <div class="stack-tag">Next.js</div>
                         </div>
+                        <div style="margin-top: 10px;">
+                            <a href="https://github.com/MadMaxINDIAN" target="_blank" rel="noopener noreferrer" style="color: var(--cyan); text-decoration: none; font-size: 12px;">View GitHub Profile →</a>
+                        </div>
                     </div>
 
                     <div class="repo-card">
                         <div class="repo-header">
                             <div class="repo-name">Loan Management Software</div>
+                            <div class="repo-badge" style="background:rgba(100,100,100,0.2);color:var(--text-dim);">PRIVATE</div>
                         </div>
                         <div class="repo-desc">70% less manual tracking, 60% fewer errors. Enterprise-grade application for financial operations.</div>
                         <div class="repo-stack">
@@ -2588,6 +2655,9 @@ export class JSONMapper {
                             <div class="stack-tag">Node.js</div>
                             <div class="stack-tag">MongoDB</div>
                             <div class="stack-tag">AWS</div>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <a href="https://github.com/MadMaxINDIAN" target="_blank" rel="noopener noreferrer" style="color: var(--cyan); text-decoration: none; font-size: 12px;">View GitHub Profile →</a>
                         </div>
                     </div>
                 </div>
@@ -2931,33 +3001,42 @@ Building developer tools that developers actually love.</span>
                 <div class="search-results">
                     <div class="search-result">
                         <div class="search-title">Languages</div>
-                        <div class="search-url">skills.example.com › programming</div>
+                        <div class="search-url">namankhater.com › skills › languages</div>
                         <div class="search-desc">Python, Java, C, JavaScript, TypeScript, SQL</div>
                     </div>
                     <div class="search-result">
                         <div class="search-title">Frontend</div>
-                        <div class="search-url">skills.example.com › frontend</div>
+                        <div class="search-url">namankhater.com › skills › frontend</div>
                         <div class="search-desc">React, Angular, Next.js, HTML5, CSS3, Tailwind CSS</div>
                     </div>
                     <div class="search-result">
                         <div class="search-title">Backend</div>
-                        <div class="search-url">skills.example.com › backend</div>
+                        <div class="search-url">namankhater.com › skills › backend</div>
                         <div class="search-desc">Node.js, ASP.NET, Django, Spring Boot, REST APIs, GraphQL</div>
                     </div>
                     <div class="search-result">
                         <div class="search-title">Cloud & Databases</div>
-                        <div class="search-url">skills.example.com › cloud</div>
+                        <div class="search-url">namankhater.com › skills › cloud</div>
                         <div class="search-desc">AWS (EC2, S3, Lambda), Azure, MongoDB, PostgreSQL, SQL Server</div>
                     </div>
                     <div class="search-result">
                         <div class="search-title">DevOps & Tools</div>
-                        <div class="search-url">skills.example.com › devops</div>
+                        <div class="search-url">namankhater.com › skills › devops</div>
                         <div class="search-desc">Docker, Jenkins, Git, GitHub Actions, CI/CD, VS Code Extension API</div>
                     </div>
                     <div class="search-result">
                         <div class="search-title">AI / ML</div>
-                        <div class="search-url">skills.example.com › ai</div>
+                        <div class="search-url">namankhater.com › skills › ai</div>
                         <div class="search-desc">Generative AI Integration, LLM APIs, Model Context Protocol (MCP)</div>
+                    </div>
+                    <div class="search-result">
+                        <div class="search-title">Agentic Web</div>
+                        <div class="search-url">namankhater.com › skills › agentic-web</div>
+                        <div class="search-desc">WebMCP (navigator.modelContext), Anthropic MCP, Google Managed MCP, MCP Server development</div>
+                        <div style="display:inline-flex;align-items:center;gap:5px;margin-top:5px;padding:3px 8px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);border-radius:10px;">
+                            <span style="width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;"></span>
+                            <span style="color:var(--cyan);font-size:10px;font-weight:600;">WebMCP enabled</span>
+                        </div>
                     </div>
                 </div>
                 </div>
@@ -2988,6 +3067,7 @@ Building developer tools that developers actually love.</span>
                         <div class="repo-badge">FEATURED</div>
                     </div>
                     <div class="repo-meta">Enterprise Code Intelligence Platform • Solo Architect • 2025–Present</div>
+                    <div class="repo-desc" style="color: var(--text); font-weight: 500; margin-bottom: 6px;">An AI-powered search engine for code — helps developers instantly find relevant context across 50+ large repositories without losing their place.</div>
                     <div class="repo-desc">Microservices platform indexing enterprise GitHub repos, delivering semantically-aware code context to AI assistants via MCP. Solves "Lost in the Middle" context degradation for 50+ repo codebases.</div>
                     <div class="repo-features">
                         <div class="repo-feature">• 8 independent microservices (TypeScript/Node.js)</div>
@@ -3016,6 +3096,7 @@ Building developer tools that developers actually love.</span>
                 <div class="repo-card">
                     <div class="repo-header">
                         <div class="repo-name">E-Commerce Platform</div>
+                        <div class="repo-badge" style="background:rgba(100,100,100,0.2);color:var(--text-dim);">PRIVATE</div>
                     </div>
                     <div class="repo-desc">Modular starter, 50% faster setup. Scalable full-stack solution with payment integration.</div>
                     <div class="repo-stack">
@@ -3024,11 +3105,15 @@ Building developer tools that developers actually love.</span>
                         <div class="stack-tag">MongoDB</div>
                         <div class="stack-tag">Docker</div>
                     </div>
+                    <div style="margin-top: 10px;">
+                        <a href="https://github.com/MadMaxINDIAN" target="_blank" rel="noopener noreferrer" style="color: var(--cyan); text-decoration: none; font-size: 12px;">View GitHub Profile →</a>
+                    </div>
                 </div>
 
                 <div class="repo-card">
                     <div class="repo-header">
                         <div class="repo-name">Loan Management Software</div>
+                        <div class="repo-badge" style="background:rgba(100,100,100,0.2);color:var(--text-dim);">PRIVATE</div>
                     </div>
                     <div class="repo-desc">70% less manual tracking, 60% fewer errors. Enterprise-grade financial operations.</div>
                     <div class="repo-stack">
@@ -3036,6 +3121,9 @@ Building developer tools that developers actually love.</span>
                         <div class="stack-tag">Node.js</div>
                         <div class="stack-tag">MongoDB</div>
                         <div class="stack-tag">AWS</div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <a href="https://github.com/MadMaxINDIAN" target="_blank" rel="noopener noreferrer" style="color: var(--cyan); text-decoration: none; font-size: 12px;">View GitHub Profile →</a>
                     </div>
                 </div>
                 </div>
@@ -3394,9 +3482,14 @@ Building developer tools that developers actually love.</span>
             }
         };
 
-        // Send message
+        // Send message — opens default mail client
         function sendMessage() {
-            alert('Message sent!');
+            window.location.href = 'mailto:naman22khater@gmail.com?subject=Let%27s%20work%20together!&body=Hi%20Naman%2C%0A%0AI%27d%20love%20to%20connect%20about%20...';
+        }
+
+        // Download CV — opens browser print dialog (Save as PDF)
+        function downloadCV() {
+            window.print();
         }
 
         // Responsive handling
@@ -3486,6 +3579,177 @@ Building developer tools that developers actually love.</span>
                 }, { passive: true });
             });
         })();
+    </script>
+
+    <!-- ============ WEBMCP — navigator.modelContext ============ -->
+    <script>
+    (function () {
+        'use strict';
+
+        // ── Polyfill for browsers without native WebMCP support ──────────────
+        if (!('modelContext' in navigator)) {
+            const _tools = {};
+            navigator.modelContext = {
+                registerTool: function (def) {
+                    _tools[def.name] = def;
+                },
+                _tools: _tools          // exposed for inspection / testing
+            };
+        }
+
+        // ── Tool data ─────────────────────────────────────────────────────────
+        var PROFILE = {
+            name: 'Naman Khater',
+            role: 'Full-Stack Software Engineer',
+            bio: '3+ years at GEP Worldwide building scalable enterprise applications, VS Code extensions with 280+ installs, and developer tooling. Specialist in Angular/React front-ends, Node.js/ASP.NET back-ends, and GenAI integration.',
+            yearsOfExperience: 3,
+            currentCompany: 'GEP Worldwide',
+            location: 'Mumbai, India',
+            openToWork: true
+        };
+
+        var PROJECTS = [
+            {
+                name: 'ECIP',
+                fullName: 'Enterprise Code Intelligence Platform',
+                description: 'An AI-powered search engine for code — helps developers instantly find relevant context across 50+ large repositories without losing their place. 8 independent microservices delivering semantically-aware context to AI assistants (GitHub Copilot, Cursor, Claude Code) via MCP.',
+                techStack: ['TypeScript', 'Node.js', 'PostgreSQL', 'pgvector', 'Redis', 'Kafka', 'Docker', 'Kubernetes', 'Voyage AI'],
+                highlights: ['Branch-aware LSP: Tree-sitter + Voyage AI embeddings (1024-dim), p95 475ms', '19-container Docker stack, 1 434+ unit tests', 'Cross-repo MCP Server federation with registry-based discovery', 'Ed25519 license signing, Stripe metering, FeatureGate'],
+                githubUrl: 'https://github.com/MadMaxINDIAN',
+                status: 'active'
+            },
+            {
+                name: 'E-Commerce Platform',
+                description: 'Modular full-stack e-commerce starter with payment integration. 50% faster project setup vs. hand-rolled solutions.',
+                techStack: ['React', 'Next.js', 'Node.js', 'MongoDB', 'Docker'],
+                githubUrl: 'https://github.com/MadMaxINDIAN',
+                status: 'private'
+            },
+            {
+                name: 'Loan Management Software',
+                description: 'Enterprise-grade financial operations platform. Reduced manual tracking by 70% and data entry errors by 60%.',
+                techStack: ['Angular', 'Node.js', 'MongoDB', 'AWS'],
+                githubUrl: 'https://github.com/MadMaxINDIAN',
+                status: 'private'
+            }
+        ];
+
+        var EXTENSIONS = [
+            {
+                name: 'MongoDB Architect',
+                vsCodeId: 'Naman09Khater.mongodb-architect',
+                description: 'Visual schema modeler for MongoDB inside VS Code. Drag-and-drop canvas with one-click export to Mongoose, TypeScript interfaces, and JSON Schema.',
+                features: ['Drag-and-drop schema editor', 'Relationship visualization', 'One-click exports: Mongoose, TypeScript, JSON Schema', 'Real-time validation'],
+                installs: '197+',
+                marketplaceUrl: 'https://marketplace.visualstudio.com/items?itemName=Naman09Khater.mongodb-architect',
+                githubUrl: 'https://github.com/MadMaxINDIAN/mongodb-architect'
+            },
+            {
+                name: 'Data Format Converter',
+                vsCodeId: 'Naman09Khater.data-converter-vscode',
+                description: 'One-click JSON ↔ XML ↔ YAML converter living inside VS Code. No copy-paste to external tools needed.',
+                features: ['JSON ↔ XML', 'JSON ↔ YAML', 'XML ↔ YAML', 'Inline editor conversion'],
+                installs: '49+',
+                marketplaceUrl: 'https://marketplace.visualstudio.com/items?itemName=Naman09Khater.data-converter-vscode'
+            },
+            {
+                name: 'JSON Mapper',
+                vsCodeId: 'Naman09Khater.json-mapper-vscode',
+                description: 'Visual JSON transformation with 20+ pre-built functions and custom code support for ETL workflows.',
+                features: ['20+ pre-built transform functions', 'Custom code support', 'Visual field-mapping interface', 'ETL workflow support'],
+                installs: '34+',
+                marketplaceUrl: 'https://marketplace.visualstudio.com/items?itemName=Naman09Khater.json-mapper-vscode'
+            }
+        ];
+
+        var SKILLS = {
+            languages: ['Python', 'Java', 'C', 'JavaScript', 'TypeScript', 'SQL'],
+            frontend: ['React', 'Angular', 'Next.js', 'HTML5', 'CSS3', 'Tailwind CSS'],
+            backend: ['Node.js', 'ASP.NET', 'Django', 'Spring Boot', 'REST APIs', 'GraphQL'],
+            cloudAndDatabases: ['AWS (EC2, S3, Lambda)', 'Azure', 'MongoDB', 'PostgreSQL', 'SQL Server'],
+            devopsAndTools: ['Docker', 'Jenkins', 'Git', 'GitHub Actions', 'CI/CD', 'VS Code Extension API'],
+            aiMl: ['Generative AI Integration', 'LLM APIs', 'Model Context Protocol (MCP)'],
+            agenticWeb: ['WebMCP (W3C browser-native tool API, navigator.modelContext)', 'Anthropic MCP (JSON-RPC, stdio/SSE transport)', 'Google Managed MCP (remote MCP servers, gRPC transport)', 'MCP Server development']
+        };
+
+        var CONTACT = {
+            email: 'naman22khater@gmail.com',
+            linkedin: 'https://www.linkedin.com/in/naman-22-khater/',
+            github: 'https://github.com/MadMaxINDIAN',
+            vsCodeMarketplace: 'https://marketplace.visualstudio.com/publishers/Naman09Khater'
+        };
+
+        // ── Helper ─────────────────────────────────────────────────────────────
+        function ok(obj) {
+            return { content: [{ type: 'text', text: JSON.stringify(obj, null, 2) }] };
+        }
+
+        // ── Register tools ────────────────────────────────────────────────────
+        navigator.modelContext.registerTool({
+            name: 'getProfile',
+            description: 'Returns Naman Khater\'s professional profile: name, role, bio, years of experience, current company, location, and openToWork status.',
+            inputSchema: { type: 'object', properties: {}, required: [], additionalProperties: false },
+            readOnly: true,
+            execute: function () { return ok(PROFILE); }
+        });
+
+        navigator.modelContext.registerTool({
+            name: 'listProjects',
+            description: 'Returns all portfolio projects (ECIP, E-Commerce Platform, Loan Management Software) with name, description, tech stack, GitHub URL, and status.',
+            inputSchema: { type: 'object', properties: {}, required: [], additionalProperties: false },
+            readOnly: true,
+            execute: function () { return ok(PROJECTS); }
+        });
+
+        navigator.modelContext.registerTool({
+            name: 'listExtensions',
+            description: 'Returns the 3 published VS Code extensions (MongoDB Architect, Data Format Converter, JSON Mapper) with name, description, features, install count, and Marketplace URL.',
+            inputSchema: { type: 'object', properties: {}, required: [], additionalProperties: false },
+            readOnly: true,
+            execute: function () { return ok(EXTENSIONS); }
+        });
+
+        navigator.modelContext.registerTool({
+            name: 'getSkills',
+            description: 'Returns technical skills grouped by category: languages, frontend, backend, cloudAndDatabases, devopsAndTools, aiMl, agenticWeb.',
+            inputSchema: { type: 'object', properties: {}, required: [], additionalProperties: false },
+            readOnly: true,
+            execute: function () { return ok(SKILLS); }
+        });
+
+        navigator.modelContext.registerTool({
+            name: 'getContact',
+            description: 'Returns contact information: email, LinkedIn URL, GitHub URL, and VS Code Marketplace URL.',
+            inputSchema: { type: 'object', properties: {}, required: [], additionalProperties: false },
+            readOnly: true,
+            execute: function () { return ok(CONTACT); }
+        });
+
+        navigator.modelContext.registerTool({
+            name: 'checkAvailability',
+            description: 'Returns current job-seeking status: openToWork flag, target roles, preferred work type, and location.',
+            inputSchema: { type: 'object', properties: {}, required: [], additionalProperties: false },
+            readOnly: true,
+            execute: function () {
+                return ok({
+                    openToWork: true,
+                    seekingRoles: ['Full-Stack Engineer', 'Backend Engineer', 'Senior SDE'],
+                    preferredWorkType: 'Remote/Hybrid',
+                    location: 'Mumbai, India',
+                    note: 'Targeting 30–50% compensation growth. Open to product-led companies.'
+                });
+            }
+        });
+
+        // ── Update terminal status line ────────────────────────────────────────
+        var toolCount = Object.keys(navigator.modelContext._tools || {}).length;
+        var nativeSupport = !!(window._webmcpNative);   // set to true if browser provided the API
+        var statusEl = document.getElementById('webmcp-status-line');
+        if (statusEl) {
+            var toolNames = PROFILE ? ['getProfile','listProjects','listExtensions','getSkills','getContact','checkAvailability'] : [];
+            statusEl.textContent = '✓ navigator.modelContext registered — 6 tools: ' + toolNames.join(', ');
+        }
+    })();
     </script>
 </body>
 </html>
